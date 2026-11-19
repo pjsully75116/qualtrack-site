@@ -6,7 +6,10 @@ Static, single-page marketing site for QualTrack, a Windows desktop app that tra
 - `index.html`: the whole site. All CSS is inline in `<style>`; one small inline script draws the decorative dashboard rows.
 - `assets/logo.png`: purple "Q" bullseye logo, transparent background.
 - `assets/favicon.png`, `assets/apple-touch-icon.png`: browser and home-screen icons.
-- `feedback.html`: a short user-feedback form (adopt Y/N, saves time Y/N + optional hours per week, what could be better, optional contact email), linked from the landing page footer. Same look as `index.html`, with its CSS copied inline.
+- `feedback.html`: a short user-feedback form (adopt Y/N, hours saved per week 0–10+, what could be better, optional contact email), linked from the landing page footer. Same look as `index.html`, with its CSS copied inline.
+  - Answers post in the background to the owner's "QualTrack Feedback" Google Form (`GOOGLE_FORM` and `FIELDS` at the top of the script); visitors never leave the page. Responses are in that form's Responses tab.
+  - Sent values must match the Google Form's choices exactly ("Yes"/"No", "0"–"10+"), or Google silently drops the answer. If a question is added, renamed to a different type, or its choices change in the Google Form, update the page to match and re-read the field IDs from the form's `FB_PUBLIC_LOAD_DATA_`.
+  - The post is `no-cors`, so the page can't confirm Google accepted it. Test a real submission after any change.
 - No build step, no framework, no package.json. Open `index.html` in a browser to preview.
 
 ## Design rules (keep these)
@@ -23,7 +26,6 @@ Static, single-page marketing site for QualTrack, a Windows desktop app that tra
 ## Open items before launch
 - The hero shows a disabled "Coming soon" button. The real "Download for Windows" link is commented out above it; at launch, swap them and point its href at the installer (planned: GitHub Releases `latest/download` URL).
 - `contact@qualtrack.app` is a placeholder email.
-- The feedback form is a stub: Submit shows the thank-you message and logs the answers to the browser console, but sends nothing. Wire it to a backend (marked `STUB` in the script) before relying on it.
 
 ## Hosting
 GitHub Pages from `main` (pjsully75116/qualtrack-site), custom domain qualtrack.app with HTTPS enforced. DNS is at Namecheap (BasicDNS): four A records for `@` to GitHub Pages' IPs and a `www` CNAME to `pjsully75116.github.io`. Pushing to `main` deploys.

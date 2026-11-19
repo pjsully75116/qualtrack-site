@@ -21,6 +21,7 @@
   --mono:'Geist Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:var(--accent);text-decoration:none}
@@ -60,12 +61,8 @@ form{margin-top:40px;display:flex;flex-direction:column;gap:16px}
 .yn label{flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--body);font-size:15px;cursor:pointer;transition:border-color .15s,background .15s}
 .yn label:hover{border-color:#4a5070}
 .yn input:focus-visible + label{outline:2px solid var(--accent);outline-offset:3px}
-.yn input[value="yes"]:checked + label{border-color:var(--ok);background:rgba(92,197,138,.12);color:var(--text)}
-.yn input[value="no"]:checked + label{border-color:var(--dq);background:rgba(224,102,102,.12);color:var(--text)}
-
-.hours{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.hours[hidden]{display:none}
-.hours label{font-size:14px;color:var(--muted)}
+.yn input[value="Yes"]:checked + label{border-color:var(--ok);background:rgba(92,197,138,.12);color:var(--text)}
+.yn input[value="No"]:checked + label{border-color:var(--dq);background:rgba(224,102,102,.12);color:var(--text)}
 
 select,textarea,input[type=email]{width:100%;font:inherit;font-size:15px;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:11px 12px}
 select{width:auto;min-width:160px;min-height:44px;padding-right:36px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' fill='none' stroke='%239ba3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
@@ -117,29 +114,28 @@ footer{border-top:1px solid var(--divider)}
       <fieldset class="q">
         <legend>Do you want the Navy to adopt QualTrack?</legend>
         <div class="yn">
-          <input type="radio" id="adopt-yes" name="adopt" value="yes" required><label for="adopt-yes">Yes</label>
-          <input type="radio" id="adopt-no" name="adopt" value="no"><label for="adopt-no">No</label>
+          <input type="radio" id="adopt-yes" name="adopt" value="Yes" required><label for="adopt-yes">Yes</label>
+          <input type="radio" id="adopt-no" name="adopt" value="No"><label for="adopt-no">No</label>
         </div>
       </fieldset>
 
-      <fieldset class="q">
-        <legend>Is it saving you time in your job?</legend>
-        <div class="yn">
-          <input type="radio" id="saves-yes" name="savesTime" value="yes" required><label for="saves-yes">Yes</label>
-          <input type="radio" id="saves-no" name="savesTime" value="no"><label for="saves-no">No</label>
-        </div>
-        <div class="hours" id="hours" hidden>
-          <label for="hoursPerWeek">About how many hours a week? <span class="opt">(optional)</span></label>
-          <select id="hoursPerWeek" name="hoursPerWeek">
-            <option value="">Select…</option>
-            <option value="<1">Less than 1</option>
-            <option value="1-2">1–2 hours</option>
-            <option value="3-5">3–5 hours</option>
-            <option value="6-10">6–10 hours</option>
-            <option value="10+">More than 10</option>
-          </select>
-        </div>
-      </fieldset>
+      <div class="q">
+        <label class="label" for="hoursPerWeek">How many hours would you save each week? <span class="opt">(optional)</span></label>
+        <select id="hoursPerWeek" name="hoursPerWeek">
+          <option value="">Select…</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10+">10+</option>
+        </select>
+      </div>
 
       <div class="q">
         <label class="label" for="better">What could be better? <span class="opt">(optional)</span></label>
@@ -147,7 +143,7 @@ footer{border-top:1px solid var(--divider)}
       </div>
 
       <div class="q">
-        <label class="label" for="email">Can we contact you to improve QualTrack? <span class="opt">(optional)</span></label>
+        <label class="label" for="email">Can we contact you to improve? <span class="opt">(optional)</span></label>
         <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
         <p class="hint">Leave blank to stay anonymous. We'll only use it to follow up about QualTrack.</p>
       </div>
@@ -177,22 +173,26 @@ footer{border-top:1px solid var(--divider)}
 </footer>
 
 <script>
+/* Answers are posted in the background to the "QualTrack Feedback" Google Form,
+   so visitors never leave this page. Each key is that form question's field ID;
+   the values sent must match the form's choices exactly ("Yes"/"No", "0"–"10+"). */
+var GOOGLE_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSdRjbCp3KzDWoimr7kR64Kd1p3D-R7h_3cKg5keexmM7h2GYw/formResponse';
+var FIELDS = {
+  adopt: 'entry.200306476',
+  hoursPerWeek: 'entry.392950673',
+  better: 'entry.1254575188',
+  email: 'entry.1435734496'
+};
+
 (function () {
   var form = document.getElementById('feedback');
-  var hours = document.getElementById('hours');
   var error = document.getElementById('error');
-
-  // The hours question only applies when it is saving them time.
-  form.addEventListener('change', function (e) {
-    if (e.target.name !== 'savesTime') return;
-    hours.hidden = e.target.value !== 'yes';
-    if (hours.hidden) form.hoursPerWeek.value = '';
-  });
+  var button = form.querySelector('button[type=submit]');
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!form.adopt.value || !form.savesTime.value) {
-      error.textContent = 'Please answer both Yes/No questions.';
+    if (!form.adopt.value) {
+      error.textContent = 'Please answer whether the Navy should adopt QualTrack.';
       return;
     }
     if (form.email.value && !form.email.checkValidity()) {
@@ -202,23 +202,29 @@ footer{border-top:1px solid var(--divider)}
     }
     error.textContent = '';
 
-    var feedback = {
-      adopt: form.adopt.value,
-      savesTime: form.savesTime.value,
-      hoursPerWeek: form.hoursPerWeek.value || null,
-      better: form.better.value.trim() || null,
-      email: form.email.value.trim() || null,
-      submittedAt: new Date().toISOString()
-    };
+    var body = new URLSearchParams();
+    Object.keys(FIELDS).forEach(function (name) {
+      var value = form[name].value.trim();
+      if (value) body.append(FIELDS[name], value);
+    });
 
-    // STUB: nothing is sent yet. Replace this with a POST to the feedback
-    // backend (form service, Google Form, or an API) once one is chosen.
-    console.log('Feedback (not sent, stub):', feedback);
+    button.disabled = true;
+    button.textContent = 'Sending…';
 
-    form.hidden = true;
-    var thanks = document.getElementById('thanks');
-    thanks.hidden = false;
-    thanks.focus();
+    // Google doesn't allow reading the reply from another site (no-cors), so a
+    // completed request is treated as sent; only a network failure shows an error.
+    fetch(GOOGLE_FORM, { method: 'POST', mode: 'no-cors', body: body })
+      .then(function () {
+        form.hidden = true;
+        var thanks = document.getElementById('thanks');
+        thanks.hidden = false;
+        thanks.focus();
+      })
+      .catch(function () {
+        error.textContent = 'Couldn’t send. Check your connection and try again.';
+        button.disabled = false;
+        button.textContent = 'Send feedback';
+      });
   });
 })();
 </script>
