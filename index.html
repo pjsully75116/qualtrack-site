@@ -58,6 +58,11 @@ h1{margin:20px 0 0;font-size:clamp(40px,6.4vw,76px);line-height:1.02;letter-spac
 .btn-primary{background:var(--accent);color:#141726;font-weight:600;box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 8px 24px -8px rgba(123,164,217,.5);transition:background .15s}
 .btn-primary:hover{background:#8db2e1;color:#141726}
 .btn-disabled{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-weight:500;cursor:not-allowed}
+.btn-secondary{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-weight:500;transition:border-color .15s,color .15s}
+.btn-secondary:hover{border-color:#4a5070;color:var(--text)}
+.cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.cta-row .btn{min-width:168px;justify-content:center}
+@media (max-width:420px){.cta-row{flex-wrap:nowrap;width:100%}.cta-row .btn{min-width:0;flex:1;padding:0 12px;gap:8px}}
 
 /* Product visual */
 .spectrum{height:1px;margin:0 8%;opacity:.55;background:linear-gradient(90deg,rgba(92,197,138,0),var(--ok) 20%,var(--due) 45%,var(--soon) 65%,var(--dq) 82%,rgba(224,102,102,0))}
@@ -123,17 +128,23 @@ footer{border-top:1px solid var(--divider)}
       <p class="sub">Track quals, forecast sustainments, and route paperwork for signature, fully offline.</p>
 
       <div class="cta">
-        <!-- LIVE: delete the button below, uncomment this link, and point href at the installer
-             (e.g. https://github.com/<owner>/<repo>/releases/latest/download/QualTrackSetup.exe).
-        <a class="btn btn-primary" href="/download/QualTrackSetup.exe" download>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 2.6l5.7-.8v5.5H1V2.6zm6.4-.9L15 .6v6.7H7.4V1.7zM1 8h5.7v5.5L1 12.7V8zm6.4 0H15v7.4l-7.6-1.1V8z"/></svg>
-          Download for Windows
-        </a>
-        -->
-        <button class="btn btn-disabled" type="button" disabled>
-          <span class="dot due" aria-hidden="true"></span>
-          Coming soon
-        </button>
+        <div class="cta-row">
+          <!-- LIVE: delete the button below, uncomment this link, and point href at the installer
+               (e.g. https://github.com/<owner>/<repo>/releases/latest/download/QualTrackSetup.exe).
+          <a class="btn btn-primary" href="/download/QualTrackSetup.exe" download>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 2.6l5.7-.8v5.5H1V2.6zm6.4-.9L15 .6v6.7H7.4V1.7zM1 8h5.7v5.5L1 12.7V8zm6.4 0H15v7.4l-7.6-1.1V8z"/></svg>
+            Download for Windows
+          </a>
+          -->
+          <button class="btn btn-disabled" type="button" disabled>
+            <span class="dot due" aria-hidden="true"></span>
+            Coming soon
+          </button>
+          <a class="btn btn-secondary" href="feedback.html">
+            <span class="dot" style="background:var(--accent)" aria-hidden="true"></span>
+            Feedback
+          </a>
+        </div>
         <p class="mono">Windows 10/11 · Works on airgapped networks</p>
       </div>
     </section>
