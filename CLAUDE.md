@@ -10,6 +10,8 @@ Static, single-page marketing site for QualTrack, a Windows desktop app that tra
   - Answers post in the background to the owner's "QualTrack Feedback" Google Form (`GOOGLE_FORM` and `FIELDS` at the top of the script); visitors never leave the page. Responses are in that form's Responses tab.
   - Sent values must match the Google Form's choices exactly ("Yes"/"No", "0"–"10+"), or Google silently drops the answer. If a question is added, renamed to a different type, or its choices change in the Google Form, update the page to match and re-read the field IDs from the form's `FB_PUBLIC_LOAD_DATA_`.
   - The post is `no-cors`, so the page can't confirm Google accepted it. Test a real submission after any change.
+- `about.html`: a short About Us page (the founding team's story, written by the owner; keep its wording) ending in "Help us get there." with a button to the feedback page.
+- Every page's footer links Feedback and About Us; keep the three footers in sync.
 - No build step, no framework, no package.json. Open `index.html` in a browser to preview.
 
 ## Design rules (keep these)

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Us · QualTrack</title>
+<meta name="description" content="Why we're building QualTrack.">
+<meta name="theme-color" content="#1a1d2e">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1d2e; --glow:#2c3148; --surface:#242838;
+  --border:#3a4058; --divider:#2e3349;
+  --text:#f0f2f7; --body:#d0d5e2; --muted:#9ba3b8; --accent:#7ba4d9;
+  --ok:#5cc58a; --due:#e6c35c; --soon:#e8955a; --dq:#e06666;
+  --sans:'Geist','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Geist Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--body);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:#a8c4ea}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.mono{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* Header */
+.hero-band{flex:1;background:radial-gradient(ellipse 60% 55% at 50% 20%,var(--glow) 0%,rgba(44,49,72,.45) 40%,rgba(26,29,46,0) 72%)}
+header{max-width:1120px;margin:0 auto;padding:24px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-.01em}
+.brand:hover{color:var(--text)}
+.brand img{width:24px;height:24px;display:block}
+
+/* Page */
+main{max-width:620px;margin:0 auto;padding:64px 20px 112px;animation:fade .7s ease-out both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){main{animation:none}}
+.eyebrow{display:flex;align-items:center;gap:10px;letter-spacing:.02em}
+.dots{display:flex;gap:4px}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex:none}
+.ok{background:var(--ok)}.due{background:var(--due)}.soon{background:var(--soon)}.dq{background:var(--dq)}
+h1{margin:16px 0 0;font-size:clamp(32px,6vw,44px);line-height:1.08;letter-spacing:-.04em;font-weight:600;color:var(--text)}
+.story{margin:28px 0 0;font-size:18px;line-height:1.65;color:var(--body)}
+.story + .story{margin-top:18px}
+.cta{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px}
+.cta strong{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 20px;border-radius:10px;font-size:15px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--muted);transition:border-color .15s,color .15s}
+.btn:hover{border-color:#4a5070;color:var(--text)}
+
+/* Footer */
+footer{border-top:1px solid var(--divider)}
+.foot{padding-top:28px;padding-bottom:40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;font-size:13px;color:var(--muted)}
+.foot .l{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.foot small{font-size:12px}
+</style>
+</head>
+<body>
+
+<div class="hero-band">
+  <header>
+    <a class="brand" href="/" aria-label="QualTrack home">
+      <img src="assets/logo.png" alt="" width="24" height="24">
+      <span>QualTrack</span>
+    </a>
+    <a class="mono" href="/">← Back</a>
+  </header>
+
+  <main>
+    <div class="eyebrow mono">
+      <span class="dots" aria-hidden="true"><span class="dot ok"></span><span class="dot due"></span><span class="dot soon"></span><span class="dot dq"></span></span>
+      <span>Our story</span>
+    </div>
+    <h1>About Us</h1>
+    <p class="story">Our founding team served as ATOs &amp; CMAAs underway and saw wasted time on Admin.</p>
+    <p class="story">Our vision is to fix that - an accredited tool living on NIPR to get you out of the paperwork, back to your job.</p>
+    <div class="cta">
+      <strong>Help us get there.</strong>
+      <a class="btn" href="feedback.html"><span class="dot" style="background:var(--accent)" aria-hidden="true"></span>Give feedback</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div class="l">
+      <span>© 2026 QualTrack</span>
+      <a href="mailto:contact@qualtrack.app">contact@qualtrack.app</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="about.html">About Us</a>
+    </div>
+    <small>Not an official U.S. Navy or DoD product.</small>
+  </div>
+</footer>
+
+</body>
+</html>
