@@ -25,8 +25,13 @@ Static, single-page marketing site for QualTrack, a Windows desktop app that tra
 - The dashboard preview must stay abstract: no real names or ID numbers.
 - Footer disclaimer "Not an official U.S. Navy or DoD product." must remain.
 
-## Open items before launch
-- The hero shows a disabled "Coming soon" button. The real "Download for Windows" link is commented out above it; at launch, swap them and point its href at the installer (planned: GitHub Releases `latest/download` URL).
+## Download (live since 2026-11-19, beta 0.2.0)
+- The hero's "Download for Windows" button links to `https://github.com/pjsully75116/qualtrack-site/releases/latest/download/QualTrackSetup.exe`: the newest GitHub Release of *this* repo. The app's source repo is private, so its own releases are not public.
+- To publish a new version: build it in the app repo (`build-release.ps1`), then create a release here tagged `vX.Y.Z` with the installer attached under the exact name `QualTrackSetup.exe` (plus the portable zip and a `SHA256SUMS.txt`). The button needs no change; update the "Beta X.Y.Z" line under it.
+- Each build stops opening about 5 months after it is built (0.2.0: after 19 Apr 2027), so post a newer release before then.
+- The project owner shares the link with a few testers only; the AGPL licensing of the app's PDF library (iText) must be settled before any wide release (see the app repo's TODO.md).
+
+## Open items
 - `contact@qualtrack.app` is a placeholder email.
 
 ## Hosting
